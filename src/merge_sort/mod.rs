@@ -14,17 +14,22 @@ pub fn merge(vec_c: &Vec<usize>, vec_d: &Vec<usize>) -> Vec<usize> {
     let mut i = 0;
     let mut j = 0;
     let mut vec = Vec::new();
-    for _k in 0..vec_c.len() + vec_d.len() {
-        if vec_c.get(i).is_none() {
-            vec.push(vec_d[j]);
-            j += 1;
-        } else if vec_d.get(j).is_none() || vec_c.get(i) < vec_d.get(j) {
+    while i < vec_c.len() && j < vec_d.len() {
+        if vec_c[i] < vec_d[j] {
             vec.push(vec_c[i]);
             i += 1;
         } else {
             vec.push(vec_d[j]);
             j += 1;
         }
+    }
+    while i < vec_c.len() {
+        vec.push(vec_c[i]);
+        i += 1;
+    }
+    while j < vec_d.len() {
+        vec.push(vec_d[j]);
+        j += 1;
     }
     vec
 }
