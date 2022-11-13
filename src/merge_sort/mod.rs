@@ -1,19 +1,19 @@
 #![warn(unreachable_pub, unused)]
 #![warn(clippy::all, clippy::pedantic, clippy::cargo, clippy::nursery)]
 
-pub fn merge_sort(vec: &Vec<usize>) -> Vec<usize> {
+pub fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
     let len = vec.len();
     if vec.len() < 2 {
         return vec.clone();
     }
-    let vecs: Vec<Vec<usize>> = vec
+    let vecs: Vec<Vec<i32>> = vec
         .chunks((len + 2 - 1) / 2)
         .map(|x| merge_sort(&x.to_vec()))
         .collect();
     merge(&vecs[0], &vecs[1])
 }
 
-pub fn merge(vec_c: &Vec<usize>, vec_d: &Vec<usize>) -> Vec<usize> {
+pub fn merge(vec_c: &Vec<i32>, vec_d: &Vec<i32>) -> Vec<i32> {
     let mut i = 0;
     let mut j = 0;
     let mut vec = Vec::new();
