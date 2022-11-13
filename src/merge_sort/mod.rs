@@ -6,11 +6,10 @@ pub fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
     if vec.len() < 2 {
         return vec.clone();
     }
-    let vecs: Vec<Vec<i32>> = vec
-        .chunks((len + 2 - 1) / 2)
-        .map(|x| merge_sort(&x.to_vec()))
-        .collect();
-    merge(&vecs[0], &vecs[1])
+    let size = len / 2;
+    let left = merge_sort(&vec[0..size].to_vec());
+    let right = merge_sort(&vec[size..].to_vec());
+    merge(&left, &right)
 }
 
 pub fn merge(vec_c: &Vec<i32>, vec_d: &Vec<i32>) -> Vec<i32> {
