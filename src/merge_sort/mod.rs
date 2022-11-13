@@ -1,11 +1,14 @@
-pub fn merge_sort(vec: Vec<usize>) -> Vec<usize> {
+#![warn(unreachable_pub, unused)]
+#![warn(clippy::all, clippy::pedantic, clippy::cargo, clippy::nursery)]
+
+pub fn merge_sort(vec: &Vec<usize>) -> Vec<usize> {
     let len = vec.len();
     if vec.len() < 2 {
-        return vec;
+        return vec.clone();
     }
     let vecs: Vec<Vec<usize>> = vec
         .chunks((len + 2 - 1) / 2)
-        .map(|x| merge_sort(x.to_vec()))
+        .map(|x| merge_sort(&x.to_vec()))
         .collect();
     merge(&vecs[0], &vecs[1])
 }
@@ -39,9 +42,9 @@ mod tests {
     use super::*;
     #[test]
     fn it_works() {
-        assert_eq!(merge_sort(vec![5, 8, 9, 1]), vec![1, 5, 8, 9]);
+        assert_eq!(merge_sort(&vec![5, 8, 9, 1]), vec![1, 5, 8, 9]);
         assert_eq!(
-            merge_sort(vec![1, 9, 5115, 3, 16, 999, 24]),
+            merge_sort(&vec![1, 9, 5115, 3, 16, 999, 24]),
             vec![1, 3, 9, 16, 24, 999, 5115]
         )
     }
